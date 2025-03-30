@@ -3,21 +3,18 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 const HeaderContainer = styled.header`
-  text-align: center;
+  text-align: left;
   margin-bottom: 2rem;
 `;
 
 const Title = styled(motion.h1)`
-  font-size: 3.5rem;
+  font-size: 2.2rem;
   margin-bottom: 0.5rem;
-  background: linear-gradient(45deg, #ff6b6b, #6b66ff);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  color: #8B0000; /* Dark red color */
+  text-shadow: none;
 
   @media (max-width: 768px) {
-    font-size: 2.5rem;
+    font-size: 1.8rem;
   }
 `;
 
@@ -25,7 +22,7 @@ const Subtitle = styled(motion.p)`
   font-size: 1.2rem;
   color: #666;
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0;
   line-height: 1.6;
 
   @media (max-width: 768px) {
@@ -41,7 +38,7 @@ const Header = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        SwiftyScribe
+        Swifty Scribe
       </Title>
       <Subtitle
         initial={{ y: 20, opacity: 0 }}

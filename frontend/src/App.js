@@ -4,9 +4,8 @@ import { motion } from 'framer-motion';
 import { checkHealth } from './services/api';
 import LyricsGenerator from './components/LyricsGenerator';
 import Header from './components/Header';
-import BackgroundDecoration from './components/BackgroundDecoration';
 
-const AppContainer = styled(motion.div)`
+const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -38,11 +37,11 @@ const StatusBadge = styled.div`
   bottom: 20px;
   right: 20px;
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: 8px;
   font-size: 14px;
   background-color: ${props => props.isOnline ? '#4caf50' : '#f44336'};
   color: white;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -54,7 +53,7 @@ const StatusDot = styled.span`
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: ${props => props.isOnline ? '#ffffff' : '#ffffff'};
+  background-color: white;
 `;
 
 function App() {
@@ -77,37 +76,30 @@ function App() {
   }, []);
 
   return (
-    <>
-      <BackgroundDecoration />
-      <AppContainer
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Header />
-        
-        <MainContent>
-          <LyricsGenerator />
-        </MainContent>
-        
-        <Footer>
-          <p>SwiftyScribe © {new Date().getFullYear()} | Powered by Taylor Swift's lyrical genius and machine learning</p>
-        </Footer>
-        
-        {!modelStatus.checking && (
-          <StatusBadge 
-            isOnline={modelStatus.loaded}
-            as={motion.div}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1 }}
-          >
-            <StatusDot isOnline={modelStatus.loaded} />
-            {modelStatus.loaded ? 'AI model ready' : 'AI model offline'}
-          </StatusBadge>
-        )}
-      </AppContainer>
-    </>
+    <AppContainer>
+      <Header />
+      
+      <MainContent>
+        <LyricsGenerator />
+      </MainContent>
+      
+      <Footer>
+        <p>Swifty Scribe © {new Date().getFullYear()} | Powered by Taylor Swift's lyrical genius and machine learning</p>
+      </Footer>
+      
+      {!modelStatus.checking && (
+        <StatusBadge 
+          isOnline={modelStatus.loaded}
+          as={motion.div}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1 }}
+        >
+          <StatusDot isOnline={modelStatus.loaded} />
+          {modelStatus.loaded ? 'AI model ready' : 'AI model offline'}
+        </StatusBadge>
+      )}
+    </AppContainer>
   );
 }
 

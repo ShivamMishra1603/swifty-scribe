@@ -24,104 +24,55 @@ const InputContainer = styled.div`
 const StyledInput = styled.input`
   padding: 1rem 1.5rem;
   font-size: 1.2rem;
-  border-radius: 50px;
-  border: 2px solid #e1e1e1;
-  background-color: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  border: 1px solid #e1e1e1;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   width: 100%;
   
   &:focus {
     outline: none;
-    border-color: #722ed1;
-    box-shadow: 0 4px 15px rgba(114, 46, 209, 0.2);
-  }
-`;
-
-const SliderContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const SliderLabel = styled.label`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  font-size: 0.9rem;
-  color: #666;
-`;
-
-const Slider = styled.input`
-  width: 100%;
-  -webkit-appearance: none;
-  height: 10px;
-  border-radius: 5px;
-  background: linear-gradient(to right, #722ed1, #13c2c2);
-  outline: none;
-  
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  &::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: white;
-    cursor: pointer;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+    border-color: #8B0000;
+    box-shadow: 0 2px 5px rgba(139, 0, 0, 0.1);
   }
 `;
 
 const SubmitButton = styled(motion.button)`
-  padding: 1rem 2rem;
-  font-size: 1.2rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
   font-weight: 600;
   color: #fff;
-  background: linear-gradient(45deg, #722ed1, #2f54eb);
+  background-color: #8B0000;
   border: none;
-  border-radius: 50px;
+  border-radius: 8px;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
   margin-top: 1rem;
   width: 100%;
   
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    background-color: #6B0000;
   }
   
   &:disabled {
     background: #ccc;
     cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
   }
 `;
 
 const ResultContainer = styled(motion.div)`
   width: 100%;
   padding: 2rem;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 20px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   margin-top: 2rem;
   min-height: 300px;
   display: flex;
   flex-direction: column;
   position: relative;
-  backdrop-filter: blur(5px);
 `;
 
 const ResultHeader = styled.div`
@@ -136,10 +87,7 @@ const ResultHeader = styled.div`
 const ResultTitle = styled.h3`
   font-size: 1.5rem;
   margin: 0;
-  background: linear-gradient(45deg, #722ed1, #2f54eb);
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+  color: #8B0000;
 `;
 
 const LyricsContent = styled.div`
@@ -156,12 +104,12 @@ const LoadingIndicator = styled(motion.div)`
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 20px;
+  border-radius: 8px;
   z-index: 2;
 `;
 
@@ -169,7 +117,7 @@ const CopyButton = styled(motion.button)`
   background: none;
   border: none;
   font-size: 0.9rem;
-  color: #722ed1;
+  color: #8B0000;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -178,7 +126,7 @@ const CopyButton = styled(motion.button)`
   border-radius: 4px;
   
   &:hover {
-    background-color: rgba(114, 46, 209, 0.1);
+    background-color: rgba(139, 0, 0, 0.05);
   }
 `;
 
@@ -192,7 +140,7 @@ const ErrorMessage = styled(motion.div)`
   padding: 1rem;
   background-color: #fff2f0;
   border: 1px solid #ffccc7;
-  border-radius: 10px;
+  border-radius: 8px;
   color: #f5222d;
   margin-top: 1rem;
   width: 100%;
@@ -208,8 +156,6 @@ const HelpText = styled.p`
 
 const LyricsGenerator = () => {
   const [prompt, setPrompt] = useState('');
-  const [temperature, setTemperature] = useState(0.8);
-  const [maxLength, setMaxLength] = useState(128);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [result, setResult] = useState(null);
@@ -226,7 +172,8 @@ const LyricsGenerator = () => {
     try {
       setLoading(true);
       setError('');
-      const data = await generateLyrics(prompt, maxLength, temperature);
+      // Use fixed values for maxLength and temperature
+      const data = await generateLyrics(prompt, 128, 0.8);
       setResult(data);
     } catch (err) {
       setError('Failed to generate lyrics. Please try again later.');
@@ -257,43 +204,10 @@ const LyricsGenerator = () => {
             disabled={loading}
           />
           
-          <SliderContainer>
-            <SliderLabel>
-              <span>Creativity Level: {temperature.toFixed(1)}</span>
-              <span>{temperature < 0.5 ? 'More Predictable' : temperature > 0.9 ? 'Very Creative' : 'Balanced'}</span>
-            </SliderLabel>
-            <Slider
-              type="range"
-              min="0.1"
-              max="1.5"
-              step="0.1"
-              value={temperature}
-              onChange={(e) => setTemperature(parseFloat(e.target.value))}
-              disabled={loading}
-            />
-          </SliderContainer>
-          
-          <SliderContainer>
-            <SliderLabel>
-              <span>Song Length: {maxLength}</span>
-              <span>{maxLength < 100 ? 'Short' : maxLength > 180 ? 'Long' : 'Medium'}</span>
-            </SliderLabel>
-            <Slider
-              type="range"
-              min="64"
-              max="256"
-              step="8"
-              value={maxLength}
-              onChange={(e) => setMaxLength(parseInt(e.target.value))}
-              disabled={loading}
-            />
-          </SliderContainer>
-          
           <SubmitButton
             type="submit"
             disabled={loading || !prompt}
             whileTap={{ scale: 0.98 }}
-            whileHover={{ scale: 1.02 }}
           >
             {loading ? 'Generating...' : 'Generate Lyrics'}
           </SubmitButton>
@@ -312,8 +226,7 @@ const LyricsGenerator = () => {
       
       {!result && !loading && (
         <HelpText>
-          Enter a phrase to start your song, adjust the creativity level and length,
-          then watch as AI generates Taylor Swift-style lyrics just for you!
+          Enter a phrase to start your song, then watch as AI generates Taylor Swift-style lyrics just for you!
         </HelpText>
       )}
       
@@ -335,8 +248,8 @@ const LyricsGenerator = () => {
                   width: 40, 
                   height: 40, 
                   borderRadius: '50%', 
-                  border: '3px solid rgba(114, 46, 209, 0.2)', 
-                  borderTop: '3px solid #722ed1' 
+                  border: '3px solid rgba(139, 0, 0, 0.2)', 
+                  borderTop: '3px solid #8B0000' 
                 }}
               />
               <LoaderText>
@@ -357,10 +270,9 @@ const LyricsGenerator = () => {
           ) : (
             <>
               <ResultHeader>
-                <ResultTitle>Your SwiftyScribe Song</ResultTitle>
+                <ResultTitle>Your Swifty Scribe Song</ResultTitle>
                 <CopyButton 
                   onClick={copyToClipboard}
-                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   {copied ? 'Copied! ✓' : 'Copy to clipboard'}
